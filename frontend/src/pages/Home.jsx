@@ -28,7 +28,7 @@ export default function Home() {
                 </p>
                 <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
                     <Link to="/events" className="btn" style={{ padding: '14px 32px', fontSize: '1.1rem' }}>Browse Events</Link>
-                    <Link to="/create" className="btn" style={{ padding: '14px 32px', fontSize: '1.1rem', background: '#e2e8f0', color: 'var(--primary)' }}>Create Event</Link>
+                    <Link to="/create" className="btn" style={{ padding: '14px 32px', fontSize: '1.1rem' }}>Create Event</Link>
                 </div>
             </div>
 
