@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { API_URL } from '../config';
+import { API_URL, IMG_URL } from '../config';
 
 export default function EventDetails() {
     const { id } = useParams();
@@ -76,16 +76,18 @@ export default function EventDetails() {
     if (error) return <div className="container" style={{ padding: '40px', textAlign: 'center', color: 'red' }}>{error}</div>;
     if (!event) return null;
 
+    const imageUrl = event.image ? (event.image.startsWith('http') ? event.image : `${IMG_URL}${event.image}`) : null;
+
     return (
         <div className="animate-in" style={{ maxWidth: '800px', margin: '0 auto' }}>
             <div style={{
                 height: '300px',
                 borderRadius: '16px',
-                background: event.image ? `url(${event.image}) center/cover` : 'linear-gradient(45deg, #1e293b, #0f172a)',
+                background: imageUrl ? `url(${imageUrl}) center/cover` : 'linear-gradient(45deg, #1e293b, #0f172a)',
                 marginBottom: '32px',
                 display: 'flex', alignItems: 'end', padding: '32px'
             }}>
-                {!event.image && <h1 className="h1" style={{ margin: 0, opacity: 0.2 }}>EVENT</h1>}
+                {!imageUrl && <h1 className="h1" style={{ margin: 0, opacity: 0.2 }}>EVENT</h1>}
             </div>
 
             <div className="card">
@@ -124,11 +126,11 @@ export default function EventDetails() {
                     zIndex: 1000
                 }}>
                     <div className="card" style={{ width: '450px', maxWidth: '90%', padding: 0, overflow: 'hidden' }}>
-                        {event.image && (
+                        {imageUrl && (
                             <div style={{
                                 width: '100%',
-                                height: '150px',
-                                background: `url(${event.image}) center/cover`,
+                                height: '200px',
+                                background: `url(${imageUrl}) center/cover`,
                                 marginBottom: '20px'
                             }} />
                         )}

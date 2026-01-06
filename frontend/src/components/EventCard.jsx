@@ -1,14 +1,17 @@
 import { Link } from 'react-router-dom';
+import { IMG_URL } from '../config';
 
 export default function EventCard({ event }) {
     const date = new Date(event.date).toLocaleDateString(undefined, {
         month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'
     });
 
+    const imageUrl = event.image ? (event.image.startsWith('http') ? event.image : `${IMG_URL}${event.image}`) : null;
+
     return (
         <div className="card" style={{ padding: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ height: '160px', background: event.image ? `url(${event.image}) center/cover` : 'linear-gradient(45deg, #1e293b, #0f172a)' }}>
-                {!event.image && <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.1)', fontWeight: 700, fontSize: '3rem' }}>EVENT</div>}
+            <div style={{ height: '160px', background: imageUrl ? `url(${imageUrl}) center/cover` : 'linear-gradient(45deg, #1e293b, #0f172a)' }}>
+                {!imageUrl && <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.1)', fontWeight: 700, fontSize: '3rem' }}>EVENT</div>}
             </div>
             <div style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                 <div style={{ fontSize: '0.85rem', color: 'var(--accent)', fontWeight: 600, marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
