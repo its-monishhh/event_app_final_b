@@ -123,68 +123,78 @@ export default function EventDetails() {
                     background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center',
                     zIndex: 1000
                 }}>
-                    <div className="card" style={{ width: '400px', maxWidth: '90%' }}>
-                        <h3 className="h3">Registration Details</h3>
-                        <p style={{ marginBottom: '16px', color: 'var(--text-muted)' }}>Please provide additional info.</p>
+                    <div className="card" style={{ width: '450px', maxWidth: '90%', padding: 0, overflow: 'hidden' }}>
+                        {event.image && (
+                            <div style={{
+                                width: '100%',
+                                height: '150px',
+                                background: `url(${event.image}) center/cover`,
+                                marginBottom: '20px'
+                            }} />
+                        )}
+                        <div style={{ padding: '24px' }}>
+                            <h3 className="h3" style={{ marginTop: 0 }}>Registration Details</h3>
+                            <p style={{ marginBottom: '24px', color: 'var(--text-muted)' }}>Join <strong>{event.title}</strong> at {event.loc || 'Online'}.</p>
 
-                        <div style={{ marginBottom: '16px' }}>
-                            <label style={{ display: 'block', marginBottom: '8px' }}>USN</label>
-                            <input
-                                className="input"
-                                placeholder="1BY..."
-                                value={regForm.usn}
-                                onChange={e => setRegForm({ ...regForm, usn: e.target.value })}
-                            />
-                        </div>
-
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
-                            <div>
-                                <label style={{ display: 'block', marginBottom: '8px' }}>Branch</label>
+                            <div style={{ marginBottom: '16px' }}>
+                                <label style={{ display: 'block', marginBottom: '8px' }}>USN</label>
                                 <input
                                     className="input"
-                                    placeholder="ISE"
-                                    value={regForm.branch}
-                                    onChange={e => setRegForm({ ...regForm, branch: e.target.value })}
+                                    placeholder="1BY..."
+                                    value={regForm.usn}
+                                    onChange={e => setRegForm({ ...regForm, usn: e.target.value })}
                                 />
                             </div>
-                            <div>
-                                <label style={{ display: 'block', marginBottom: '8px' }}>Semester</label>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+                                <div>
+                                    <label style={{ display: 'block', marginBottom: '8px' }}>Branch</label>
+                                    <input
+                                        className="input"
+                                        placeholder="ISE"
+                                        value={regForm.branch}
+                                        onChange={e => setRegForm({ ...regForm, branch: e.target.value })}
+                                    />
+                                </div>
+                                <div>
+                                    <label style={{ display: 'block', marginBottom: '8px' }}>Semester</label>
+                                    <input
+                                        className="input"
+                                        type="number"
+                                        placeholder="5"
+                                        value={regForm.semester}
+                                        onChange={e => setRegForm({ ...regForm, semester: e.target.value })}
+                                    />
+                                </div>
+                            </div>
+
+                            <div style={{ marginBottom: '16px' }}>
+                                <label style={{ display: 'block', marginBottom: '8px' }}>Phone Number</label>
                                 <input
                                     className="input"
-                                    type="number"
-                                    placeholder="5"
-                                    value={regForm.semester}
-                                    onChange={e => setRegForm({ ...regForm, semester: e.target.value })}
+                                    placeholder="+1 234 567 8900"
+                                    value={regForm.phone}
+                                    onChange={e => setRegForm({ ...regForm, phone: e.target.value })}
                                 />
                             </div>
-                        </div>
 
-                        <div style={{ marginBottom: '16px' }}>
-                            <label style={{ display: 'block', marginBottom: '8px' }}>Phone Number</label>
-                            <input
-                                className="input"
-                                placeholder="+1 234 567 8900"
-                                value={regForm.phone}
-                                onChange={e => setRegForm({ ...regForm, phone: e.target.value })}
-                            />
-                        </div>
+                            <div style={{ marginBottom: '24px' }}>
+                                <label style={{ display: 'block', marginBottom: '8px' }}>Comments</label>
+                                <textarea
+                                    className="input"
+                                    rows="3"
+                                    placeholder="Any comments?"
+                                    value={regForm.details}
+                                    onChange={e => setRegForm({ ...regForm, details: e.target.value })}
+                                ></textarea>
+                            </div>
 
-                        <div style={{ marginBottom: '24px' }}>
-                            <label style={{ display: 'block', marginBottom: '8px' }}>Comments</label>
-                            <textarea
-                                className="input"
-                                rows="3"
-                                placeholder="Any comments?"
-                                value={regForm.details}
-                                onChange={e => setRegForm({ ...regForm, details: e.target.value })}
-                            ></textarea>
-                        </div>
-
-                        <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
-                            <button className="btn btn-ghost" onClick={() => setShowModal(false)} style={{ color: 'var(--text-muted)' }}>Cancel</button>
-                            <button className="btn" onClick={handleRegister} disabled={registering}>
-                                {registering ? 'Processing...' : 'Confirm Registration'}
-                            </button>
+                            <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+                                <button className="btn btn-ghost" onClick={() => setShowModal(false)} style={{ color: 'var(--text-muted)' }}>Cancel</button>
+                                <button className="btn" onClick={handleRegister} disabled={registering}>
+                                    {registering ? 'Processing...' : 'Confirm Registration'}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
