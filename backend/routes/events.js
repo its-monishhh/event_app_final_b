@@ -2,6 +2,7 @@ const express = require('express');
 const { nanoid } = require('nanoid');
 const dbOps = require('../db_sql');
 const { auth } = require('./auth');
+const { sendEventRegistrationEmail } = require('../services/emailService');
 
 const mult = require('multer');
 const path = require('path');
@@ -107,6 +108,9 @@ router.post('/:id/register', auth, async (req, res) => {
             semester: semester || ''
         };
         await dbOps.createRegistration(reg);
+
+        // Send confirmation email
+        sendEventRegistrationEmail(req.user.email, req.user.name, ev.title, ev.date, ev.loc);
 
         res.json({ ok: true });
     } catch (err) {
